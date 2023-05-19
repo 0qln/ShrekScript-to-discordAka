@@ -29,12 +29,20 @@ namespace WpfApp1 {
 
             string pathIn = @"D:\Programmmieren\Projects\ShrekScript as DC aka\Many brave knigts had attempted to .txt";
             string pathOut = @"D:\Programmmieren\Projects\ShrekScript as DC aka\out.txt";
+            string lastSuccsesfulLine = "Next! -Get up! Come on! -Twenty ";
             string text = File.ReadAllText(pathIn);
 
             text = text.Replace(Environment.NewLine, " ").Replace("\n", " ").Replace("\r", " ");
             text = Regex.Replace(text, @"\s+", " ");
             text = InsertNewLines(text, 32);
             lines = text.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+
+            TextBox textBlock = new();
+            MainCanvas.Children.Add(textBlock);
+            textBlock.Text = lines.ToList().IndexOf(lastSuccsesfulLine).ToString();
+            textBlock.Text += Environment.NewLine + lines.Length;
+            textBlock.Text += Environment.NewLine + ((double)lines.ToList().IndexOf(lastSuccsesfulLine) / (double)lines.Length).ToString();
+            textBlock.Text += Environment.NewLine + ((double)lines.ToList().IndexOf(lastSuccsesfulLine) / (double)lines.Length * 100).ToString();
         }
 
         private void YourWindow_Loaded(object sender, RoutedEventArgs e) {
